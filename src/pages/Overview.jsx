@@ -16,7 +16,7 @@ const Overview = () => {
       </div>
   </div> 
   <div>
-    <button className='flex items-center gap-2 bg-[#F0F4F4] py-3 px-4'><img src="/images/export.png" alt="export" sizes={24} /> <span className='hidden md:block'>Export</span></button></div>
+    <button className='flex items-center gap-2 bg-[#F0F4F4] py-3 px-4'><img src="/images/export.png" alt="export" sizes={24} className='shadow-2xl cursor-pointer' /> <span className='hidden md:block'>Export</span></button></div>
 </div>
 </div>
 <div className='flex justify-center mt-20'>

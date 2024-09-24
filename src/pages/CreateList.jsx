@@ -1,117 +1,115 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react';
 import Swal from 'sweetalert2';
-
-import '../App.css'
-import { Link , useNavigate} from 'react-router-dom'
+import '../App.css';
+import { Link, useNavigate } from 'react-router-dom';
 
 const CreateList = () => {
-    const [formData, setFormData] = useState(
-        {
-            campaignName: "",
-            campaignDescription: "",
-            startDate: "",
-            endDate: "",
-            digestCampaign: true,
-            linkedKeywords: [],
-            dailyDigest: ""
-          }
-    )
-    const navigate = useNavigate();
-    const handleChanges =(e) => {
-   
-        const { id, value, type, checked } = e.target;
-    
-        setFormData({
-            ...formData,
-            [id]: type === "checkbox" ? checked : value
-        });
-        
+  const [formData, setFormData] = useState({
+    campaignName: "",
+    campaignDescription: "",
+    startDate: "",
+    endDate: "",
+    digestCampaign: true,
+    linkedKeywords: [],
+    dailyDigest: ""
+  });
+  const [loading, setLoading] = useState(false); 
+  const navigate = useNavigate();
+
+  const handleChanges = (e) => {
+    const { id, value, type, checked } = e.target;
+    setFormData({
+      ...formData,
+      [id]: type === "checkbox" ? checked : value
+    });
+  }
+
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter' && e.target.value.trim()) {
+      e.preventDefault();
+      setFormData({
+        ...formData,
+        linkedKeywords: [...formData.linkedKeywords, e.target.value.trim()]
+      });
+      e.target.value = '';
     }
-    const handleKeyDown = (e) => {
-        if (e.key === 'Enter' && e.target.value.trim()) {
-          e.preventDefault(); 
-          setFormData({
-            ...formData,
-            linkedKeywords: [...formData.linkedKeywords, e.target.value.trim()]
-          });
-          e.target.value = ''; 
-        }
+  }
+
+  const removeKeyword = (index) => {
+    const updatedKeywords = formData.linkedKeywords.filter((_, i) => i !== index);
+    setFormData({
+      ...formData,
+      linkedKeywords: updatedKeywords
+    });
+  };
+
+  const handleSubmitForm = async (e) => {
+    e.preventDefault();
+    
+    if (!formData.campaignName || !formData.campaignDescription || !formData.startDate || !formData.endDate || !formData.dailyDigest) {
+      Swal.fire({
+        icon: 'error',
+        text: 'All fields are required!',
+      });
+      return;
     }
-    const removeKeyword = (index) => {
-        const updatedKeywords = formData.linkedKeywords.filter((_, i) => i !== index);
-        setFormData({
-          ...formData,
-          linkedKeywords: updatedKeywords
+
+    if (new Date(formData.endDate) < new Date(formData.startDate)) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Invalid Date Range',
+        text: 'End date must be after the start date.',
+      });
+      return;
+    }
+
+    setLoading(true); 
+
+    try {
+      const res = await fetch('https://infinion-test-int-test.azurewebsites.net/api/Campaign', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await res.json();
+      
+      if (data === false) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Submission Failed',
+          text: 'There was an error submitting the campaign.',
         });
-      };
-      const handleSubmitForm = async (e) => {
-        e.preventDefault();
-    
-        // Validate form fields
-        if (!formData.campaignName || !formData.campaignDescription || !formData.startDate || !formData.endDate || !formData.dailyDigest) {
-          Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: 'All fields are required!',
-          });
-          return;
-        }
-    
-        // Validate date range
-        if (new Date(formData.endDate) < new Date(formData.startDate)) {
-          Swal.fire({
-            icon: 'error',
-            title: 'Invalid Date Range',
-            text: 'End date must be after the start date.',
-          });
-          return;
-        }
-    
-        // Submit form data to API
-        try {
-          const res = await fetch('https://infinion-test-int-test.azurewebsites.net/api/Campaign', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(formData),
-          });
-    
-          const data = await res.json();
-    
-          if (data === false) {
-            Swal.fire({
-              icon: 'error',
-              title: 'Submission Failed',
-              text: 'There was an error submitting the campaign.',
+      } else {
+        Swal.fire({
+          icon: 'success',
+          text: 'Your campaign has been successfully created.',
+          confirmButtonText: 'Go Back to Campaign List',
+          confirmButtonColor: '#247B7B',
+        }).then((success) => {
+          if (success.isConfirmed) {
+            setFormData({
+              campaignName: '',
+              campaignDescription: '',
+              startDate: '',
+              endDate: '',
+              digestCampaign: true,
+              linkedKeywords: [],
+              dailyDigest: '',
             });
-          } else {
-            Swal.fire({
-              icon: 'success',
-              text: 'Your campaign has been successfully created.',
-              confirmButtonText: 'Go Back to Campaign List',
-              confirmButtonColor: '#247B7B',
-            }).then((success) => {
-              if (success.isConfirmed) {
-                // Reset form data
-                setFormData({
-                  campaignName: '',
-                  campaignDescription: '',
-                  startDate: '',
-                  endDate: '',
-                  digestCampaign: true,
-                  linkedKeywords: [],
-                  dailyDigest: '',
-                });
-                navigate('/campaignlist');
-              }
-            });
+            navigate('/campaignlist');
           }
-        } catch (error) {
-          console.error('Error submitting the form:', error);
-        }
-      };
-   
+        });
+      }
+    } catch (error) {
+      console.error('Error submitting the form:', error);
+    } finally {
+      setLoading(false); 
+    }
+  };
+
   return (
     <div className='md:ml-72 '>
       <div>
@@ -127,7 +125,7 @@ const CreateList = () => {
 
               </textarea>
             </div>
-            <div className='flex md:w-[60%] w-[90%] justify-between'>
+            <div className='flex flex-col md:flex-row md:w-[60%] w-[90%] md:justify-between'>
                 <div>
                 <label htmlFor="SDate" className='required'>Start Date</label> <br />
                 <input type="date" id='startDate' value={formData.startDate} className='outline-none border-2-black border p-2'  onChange={handleChanges}/>
@@ -179,11 +177,17 @@ const CreateList = () => {
                 </select>
             </div>
             <div className='flex flex-col md:flex-row gap-6'>
-             <Link to={'/'}>
-                <button className='w-[300px] text-[#247B7B] border-2 py-2  border-[#247B7B] rounded-md'>Cancel</button>
-                </Link>
-                <button className='w-[300px] text-white bg-[#247B7B] py-2 rounded-md'>Create Campaign</button>
-            </div>
+            <Link to={'/'}>
+              <button className='w-[300px] text-[#247B7B] border-2 py-2 border-[#247B7B] rounded-md'>Cancel</button>
+            </Link>
+            <button 
+              type="submit" 
+              className='w-[300px] text-white bg-[#247B7B] py-2 rounded-md'
+              disabled={loading}
+            >
+              {loading ? 'Creating...' : 'Create Campaign'}
+            </button>
+          </div>
         </form>
       </div>
     </div>

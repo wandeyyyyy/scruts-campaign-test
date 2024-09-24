@@ -14,7 +14,7 @@ const SideBar = () => {
             <img src="/images/Scrutz.png" alt="" className='w-[95px]' />
              </div>
              <ul className='w-full'>
-                <li className='w-full flex justify-center'><a href="" className='flex items-center justify-center bg-[#247B7B] text-white w-[75%] py-4 border rounded-md font-semibold' > <FaPlus color='white' className='mr-5'/>New Campaign</a></li>
+                <li className='w-full flex justify-center'><div href="" className='flex items-center justify-center bg-[#247B7B] text-white w-[75%] py-4 border rounded-md font-semibold' > <FaPlus color='white' className='mr-5'/>New Campaign</div></li>
                 <Link to='/'>
                 <li className='ml-16 font-normal  w-[190px] mt-12'>
                     <p  className='flex items-center hover:bg-white p-3 cursor-pointer '>< MdDashboard className='mr-4' size={24}/> Overview</p></li>
@@ -22,17 +22,17 @@ const SideBar = () => {
                     <Link to='/campaignlist'>
                 <li className=' ml-16 font-normal  w-[190px]'>
                     <div>
-                    <a href="" className='flex items-center hover:bg-white p-3'> <MdCampaign className='mr-4' size={24}/> Campaign</a>
+                    <div href="" className='flex items-center hover:bg-white p-3'> <MdCampaign className='mr-4' size={24}/> Campaign</div>
                         </div></li>
                       </Link>
                       <Link to='/'>
                 <li className=' ml-16 font-normal  w-[210px]'>
                     <div>
-                    <a href="" className='flex items-center hover:bg-white p-3'> < FaLightbulb  className='mr-4' size={24}/>Market Intelligence</a>
+                    <div href="" className='flex items-center hover:bg-white p-3'> < FaLightbulb  className='mr-4' size={24}/>Market Intelligence</div>
                         </div></li>
                        </Link>
                        <Link to='/'>
-                <li className='  ml-16 font-normal  w-[190px]'><a href="" className='flex items-center  hover:bg-white p-3'> <MdSettings className='mr-4 ' size={24}/>Account Settings</a></li>
+                <li className='  ml-16 font-normal  w-[190px]'><div href="" className='flex items-center  hover:bg-white p-3'> <MdSettings className='mr-4 ' size={24}/>Account Settings</div></li>
                 </Link>
              </ul>
             <div className='flex justify-center'>

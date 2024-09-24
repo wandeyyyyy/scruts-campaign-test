@@ -14,7 +14,7 @@ const NavBar = () => {
             <FaBell/>
         <div className='flex items-center gap-3'>
             <FaUser/>
-            <button className='hidden md:block bg-[#247B7B] text-white font-bold px-4 py-2 rounded-sm'>Big Tech</button>
+            <button className='hidden md:block bg-[#247B7B] shadow-2xl text-white font-bold px-4 py-2 rounded-sm'>Big Tech</button>
             </div>
             </div>
     </div>
