@@ -3,17 +3,20 @@ import { Link } from 'react-router-dom';
 import { FaPlus } from 'react-icons/fa'
 const Overview = () => {
   return (
-    <div className='ml-72  '>
-      <div className='flex items-center justify-between px-10'>
+    <div className='md:ml-72  '>
+      <div className='md:flex md:items-center md:justify-between px-10'>
       <div>
       <p className='font-extrabold text-[#247B7B] text-[24px]'>OverView</p>
       </div>
-<div className='flex items-center p-3'>
-  <div className='border border-2-black p-3 flex'>
-    <div className='flex items-center gap-2 px-3 border-r-2'><img src="/images/date.png" alt="" /> Date Range </div>
-    <div className='px-3'><input type="date" name="" id="" placeholder='November 2022 - November 2024'/></div>
-  </div>
-  <div><button className='flex items-center gap-2 bg-[#F0F4F4] py-3 px-4'><img src="/images/export.png" alt="" /> Export</button></div>
+<div className='flex  items-center p-3'>
+  <div className='border border-2-black p-3 md:flex'>
+    <div className='md:flex md:items-center gap-2 px-3 md:border-r-2'><img src="/images/date.png" alt="" /> Date Range </div>
+    <div className='px-3'>
+      <input type="date" name="" id="" placeholder='November 2022 - November 2024'/>
+      </div>
+  </div> 
+  <div>
+    <button className='flex items-center gap-2 bg-[#F0F4F4] py-3 px-4'><img src="/images/export.png" alt="export" sizes={24} /> <span className='hidden md:block'>Export</span></button></div>
 </div>
 </div>
 <div className='flex justify-center mt-20'>

@@ -76,23 +76,23 @@ const Campaign = () => {
 };
   return (
     <>
-    <div className='ml-72 px-10'>
+    <div className='md:ml-72 px-10'>
     <div className='font-extrabold text-[#247B7B] text-[24px]'>All Campaigns</div>
-    <div className='md:flex md:justify-between mt-6 w-[85%]'>
-      <div className='flex gap-4 w-full'>
-        <div className='border-2 border-[#247B7B] text-[#247B7B] px-10 py-1 rounded-md'>All({campaigns.length})</div>
-        <div className='border-2 border-[#247B7B] text-[#247B7B] px-10 py-1 rounded-md'>Inactive({inactiveCount})</div>
-        <div className='border-2 border-[#247B7B] text-[#247B7B] px-10 py-1 rounded-md'>Active({activeCount})</div>
+    <div className='md:flex md:justify-between md:items-center mt-6 w-[85%]'>
+      <div className='flex gap-4 flex-col lg:flex-row w-full'>
+        <button className='border-2 border-[#247B7B] w-[80px] px-2 md:w-[150px] text-[14px] md:text-[16px] text-[#247B7B] md:px-2 py-1  md:h-[34px] rounded-md'>All({campaigns.length})</button>
+        <button className='border-2 border-[#247B7B] w-[120px] px-2 md:w-[150px] text-[14px] md:text-[16px] text-[#247B7B] md:px-2 py-1 md:h-[34px] rounded-md'>Inactive({inactiveCount})</button>
+        <button className='border-2 border-[#247B7B] w-[120px] px-2 md:w-[150px] text-[14px] md:text-[16px] text-[#247B7B] md:px-2 py-1 md:h-[34px] rounded-md'>Active({activeCount})</button>
       </div>
-      <div className='flex gap-4'>
-        <div className='flex items-center border-2 px-4 py-2'>
-        <input type="text" placeholder='search...' className='outline-none'/>
+      <div className='gap-4  md:flex items-center'>
+        <div className=' hidden items-center  border-2 px-4 py-2 lg:flex  mt-4 md:mt-0'>
+        <input type="text" placeholder='search...' className='outline-none hidden lg:block '/>
         <FaSearch/>
         </div>
-      
-        <select>
-          <option value="">Filter by date</option>
-        </select>
+        <div className='border-gray-200 border-2 mt-4 md:mt-0 px-2 '>
+        
+      <input type='date' name="date" id="date" placeholder='' className='outline-none' />
+      </div>
       </div>
     </div>
     <div className="container mt-5">

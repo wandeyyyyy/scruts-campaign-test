@@ -113,21 +113,21 @@ const CreateList = () => {
       };
    
   return (
-    <div className='ml-72'>
+    <div className='md:ml-72 '>
       <div>
         <h1 className='font-extrabold text-[#247B7B] text-[24px]'>Create New Campaign</h1>
         <form onSubmit={handleSubmitForm} className='mt-10 flex flex-col gap-6'>
             <div>
                 <label htmlFor="name" className='required'>Campaign Name</label> <br />
-                <input type="text" name="name" id="campaignName" placeholder='e.g The future is now' className='outline-none border border-gray-500 w-[60%] px-5 py-2 mt-2 rounded-md' value={formData.campaignName}  onChange={handleChanges} />
+                <input type="text" name="name" id="campaignName" placeholder='e.g The future is now' className='outline-none border border-gray-500 md:w-[60%] w-[90%] px-5 py-2 mt-2 rounded-md' value={formData.campaignName}  onChange={handleChanges} />
             </div>
             <div>
                 <label htmlFor="describe" >Campaign Description</label> <br />
-              <textarea name="describe" id="campaignDescription" placeholder='Please add a description to your campaign'  className='outline-none border border-gray-500 w-[60%] px-5 py-2 mt-2 rounded-md' value={formData.campaignDescription} onChange={handleChanges}>
+              <textarea name="describe" id="campaignDescription" placeholder='Please add a description to your campaign'  className='outline-none border border-gray-500 md:w-[60%] w-[90%] px-5 py-2 mt-2 rounded-md' value={formData.campaignDescription} onChange={handleChanges}>
 
               </textarea>
             </div>
-            <div className='flex w-[60%] justify-between'>
+            <div className='flex md:w-[60%] w-[90%] justify-between'>
                 <div>
                 <label htmlFor="SDate" className='required'>Start Date</label> <br />
                 <input type="date" id='startDate' value={formData.startDate} className='outline-none border-2-black border p-2'  onChange={handleChanges}/>
@@ -137,7 +137,7 @@ const CreateList = () => {
                  <input type="date" id='endDate' value={formData.endDate} className='outline-none border-2-black border p-2'  onChange={handleChanges}/>
                  </div>
             </div>
-            <div className='flex w-[60%] justify-between'>
+            <div className='flex md:w-[60%] w-[90%] justify-between'>
                 <p>Want to receive daily digest about the campaign?</p>
                 <div>
                     <label className='switch'>
@@ -148,8 +148,8 @@ const CreateList = () => {
             </div>
             <div>
             <label htmlFor='key' className='required'>Linked Keywords</label> <br />
-            <div className='border border-gray-500 w-[60%] px-4 rounded-md'>
-            <input type='text' id='linkedKeywordsInput' placeholder='To add keywords, type your keyword and press enter' className='outline-none w-[60%] px-5 py-2 mt-2 rounded-md' onKeyDown={handleKeyDown}
+            <div className='border border-gray-500 md:w-[60%] w-[90%] px-4 rounded-md'>
+            <input type='text' id='linkedKeywordsInput' placeholder='To add keywords, type your keyword and press enter' className='outline-none md:w-[60%] w-[90%] px-5 py-2 mt-2 rounded-md' onKeyDown={handleKeyDown}
              />
             <div className='mt-2'>
               {formData.linkedKeywords.length > 0 && (
@@ -178,7 +178,7 @@ const CreateList = () => {
                     <option value="yearly">Yearly</option>
                 </select>
             </div>
-            <div className='flex gap-6'>
+            <div className='flex flex-col md:flex-row gap-6'>
              <Link to={'/'}>
                 <button className='w-[300px] text-[#247B7B] border-2 py-2  border-[#247B7B] rounded-md'>Cancel</button>
                 </Link>

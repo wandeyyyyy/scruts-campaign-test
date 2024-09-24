@@ -6,8 +6,9 @@ import '../App.css'
 
 
 const SideBar = () => {
+  
   return (
-    <div className='fixed h-full bg-[#F0F4F4] w-72'>
+    <div className=' hidden md:block md:fixed h-full bg-[#F0F4F4] w-72'>
         <div className='flex  items-center justify-center gap-5 my-10'>
             <img src="/images/scrutz-logo.png" alt="" />
             <img src="/images/Scrutz.png" alt="" className='w-[95px]' />
@@ -24,11 +25,15 @@ const SideBar = () => {
                     <a href="" className='flex items-center hover:bg-white p-3'> <MdCampaign className='mr-4' size={24}/> Campaign</a>
                         </div></li>
                       </Link>
+                      <Link to='/'>
                 <li className=' ml-16 font-normal  w-[210px]'>
                     <div>
                     <a href="" className='flex items-center hover:bg-white p-3'> < FaLightbulb  className='mr-4' size={24}/>Market Intelligence</a>
                         </div></li>
+                       </Link>
+                       <Link to='/'>
                 <li className='  ml-16 font-normal  w-[190px]'><a href="" className='flex items-center  hover:bg-white p-3'> <MdSettings className='mr-4 ' size={24}/>Account Settings</a></li>
+                </Link>
              </ul>
             <div className='flex justify-center'>
             <div className='text-center w-[75%] bg-white mt-10 py-10 px-6 rounded-md'>

@@ -154,4 +154,10 @@ th, td {
       border: none;
       border-bottom: 1px solid #ddd;
   }
+  .fixed {
+    position: fixed;
+    width: 100%; 
+  }
+
+
 }

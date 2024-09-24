@@ -144,13 +144,19 @@ const UpdateList = () => {
   
 
   return (
-    <div className='ml-72'>
+    <div className='md:ml-72'>
       <div className='px-10'>
         <div className='flex justify-between items-center'>
           <h1 className='font-extrabold text-[#247B7B] text-[24px]'>Campaign Information</h1>
           <div className='flex bg-[#EDF0F0] rounded-md'>
             <div className='border-e-2 border px-4 py-2'>Campaign Status</div>
-            <div className='px-4 py-2' id='campaignStatus'>{formData.campaignStatus}</div>
+            <div
+              className={`px-4 py-2 font-semibold ${
+                formData.campaignStatus ? 'text-green-600' : 'text-red-600'
+              }`}
+            >
+              {formData.campaignStatus ? 'Active' : 'Inactive'}
+            </div>
           </div>
         </div>
 
@@ -228,7 +234,7 @@ const UpdateList = () => {
               <option value="yearly">Yearly</option>
             </select>
           </div>
-          <div className='flex gap-6'>
+          <div className='flex flex-col md:flex-row gap-6'>
             
               <button type='button' onClick={deletebtn} className='w-[300px] text-white font-bold bg-red-500 border-2 py-2 rounded-md'>Stop Campaign</button>
            
