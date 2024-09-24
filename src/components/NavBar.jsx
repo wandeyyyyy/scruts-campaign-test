@@ -7,7 +7,7 @@ const NavBar = () => {
     <>
 
     <div className='md:ml-72 flex w-full justify-between items-center px-10 py-6 bg-white shadow-sm'>
-    <img src="/images/Scrutz.png" alt="" className='w-[40px] h-[22px] md:hidden' />
+    <img src="/images/Scrutz.png" alt="logo" className='w-[40px] h-[22px] md:hidden' />
         <div className='border-2-black border p-2 w-[150px] lg:w-[500px] flex justify-between'>
             <input type="text" placeholder='Search...' className='outline-none ' /> 
             <span className='hidden md:block'><button><FaSearch/></button></span>
