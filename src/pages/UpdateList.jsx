@@ -16,7 +16,7 @@ const UpdateList = () => {
     endDate: "",
     linkedKeywords: [],
     dailyDigest: "Daily",
-    campaignStatus: true
+    campaignStatus: ""
   });
   
   const [loading, setLoading] = useState(false); 
@@ -68,6 +68,7 @@ const UpdateList = () => {
       endDate: formData.endDate,
       linkedKeywords: formData.linkedKeywords,
       dailyDigest: formData.dailyDigest,
+      campaignStatus: formData.campaignStatus
     };
 
     setLoading(true);
