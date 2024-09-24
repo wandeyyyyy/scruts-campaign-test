@@ -1,11 +1,14 @@
 import React, {useEffect, useState} from 'react'
+import { Link , useNavigate} from 'react-router-dom'
 import { FaSearch } from 'react-icons/fa'
+import Swal from 'sweetalert2';
 import '../App.css'
 const Campaign = () => {
-  const [campaigns, setCampaigns] = useState([]);  //
+  const [campaigns, setCampaigns] = useState([]);  
   const [error, setError] = useState(null); 
   const [activeCount, setActiveCount] = useState(0);
   const [inactiveCount, setInactiveCount] = useState(0);
+  const navigate = useNavigate();
   useEffect(() => {
     const fetchList = async () => {
       try {
@@ -14,7 +17,7 @@ const Campaign = () => {
           throw new Error('Failed to fetch campaigns');
         }
         const data = await res.json();
-        console.log("Fetched data:", data)
+        
         setCampaigns(data); 
 
         const activeCampaigns = data.filter(campaign => campaign.digestCampaign === "Yes");
@@ -31,13 +34,52 @@ const Campaign = () => {
   }, []);
  
 
-  
+  const deletebtn = (id) => {
+    Swal.fire({
+        title: 'Are you sure You Want to Delete?',
+        text: 'This action cannot be undone',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Delete Campaign'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            fetch(`https://infinion-test-int-test.azurewebsites.net/api/campaign/${id}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            })
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error(`An error occurred: ${response.status} - ${response.statusText}`);
+                }
+           
+                Swal.fire(
+                    'Deleted!',
+                    'Your campaign has been deleted.',
+                    'success'
+                );
+                navigate("/campaignlist"); 
+            })
+            .catch((error) => {
+                console.error('Delete error:', error);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Deletion Error',
+                    text: 'Failed to delete the campaign. Please try again.',
+                });
+            });
+        }
+    });
+};
   return (
     <>
     <div className='ml-72 px-10'>
     <div className='font-extrabold text-[#247B7B] text-[24px]'>All Campaigns</div>
-    <div className='flex justify-between mt-6'>
-      <div className='flex gap-4'>
+    <div className='md:flex md:justify-between mt-6 w-[85%]'>
+      <div className='flex gap-4 w-full'>
         <div className='border-2 border-[#247B7B] text-[#247B7B] px-10 py-1 rounded-md'>All({campaigns.length})</div>
         <div className='border-2 border-[#247B7B] text-[#247B7B] px-10 py-1 rounded-md'>Inactive({inactiveCount})</div>
         <div className='border-2 border-[#247B7B] text-[#247B7B] px-10 py-1 rounded-md'>Active({activeCount})</div>
@@ -56,7 +98,7 @@ const Campaign = () => {
     <div className="container mt-5">
           {error && <p className="text-red-500">Error: {error}</p>}  {/* Error handling */}
 
-          <table className='table w-full'>
+          <table className='table table-container w-full'>
             <thead>
               <tr className='bg-[#F0F4F4] py-10 '>
                 <th>S/N</th>
@@ -85,12 +127,13 @@ const Campaign = () => {
                         <button>
                         <img src="/images/mdi_eye-outline.png" alt="view" />
                         </button>
-             <button>
-             <img src="/images/lucide_edit.png" alt="" />
-             </button>
-                      <button>
-                      <img src="/images/material-symbols_delete-outline-rounded.png" alt="delete" />
-                      </button>
+
+            <Link to={`/update-list/${campaign.id}`}>
+             <img src="/images/lucide_edit.png" alt="edit" />
+             </Link>
+             <button onClick={() => deletebtn(campaign.id)}>
+                            <img src="/images/material-symbols_delete-outline-rounded.png" alt="delete" />
+                          </button>
                        
                         
                       </div>

@@ -1,3 +1,8 @@
+body{
+  font-family: "Nunito", sans-serif
+}
+
+
 .help{
   color: brown;
   background: -webkit-linear-gradient(#247B7B,#3B247B);
@@ -105,3 +110,48 @@ box-shadow:  0 0 1px #3B247B;
       font-weight: bold;
     }
     
+/* table responsiveness */
+  
+
+.table-container {
+  overflow-x: auto; 
+  max-width: 100%; 
+}
+
+.table {
+  width: 100%; 
+  border-collapse: collapse; 
+}
+
+th, td {
+  padding: 10px; 
+  text-align: center; 
+  border: 1px solid #ddd; 
+}
+
+/* For mobile view */
+@media (max-width: 768px) {
+  table {
+      display: block; 
+      overflow-x: auto; 
+      white-space: nowrap; 
+  }
+
+  thead {
+      display: none; 
+  }
+
+  tr {
+      display: flex; 
+      flex-direction: column; 
+      margin-bottom: 1em;
+  }
+
+  td {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.5em;
+      border: none;
+      border-bottom: 1px solid #ddd;
+  }
+}

@@ -24,7 +24,7 @@ const SideBar = () => {
                     <a href="" className='flex items-center hover:bg-white p-3'> <MdCampaign className='mr-4' size={24}/> Campaign</a>
                         </div></li>
                       </Link>
-                <li className=' ml-16 font-normal  w-[200px]'>
+                <li className=' ml-16 font-normal  w-[210px]'>
                     <div>
                     <a href="" className='flex items-center hover:bg-white p-3'> < FaLightbulb  className='mr-4' size={24}/>Market Intelligence</a>
                         </div></li>

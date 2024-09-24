@@ -44,58 +44,73 @@ const CreateList = () => {
           linkedKeywords: updatedKeywords
         });
       };
-      const handleSubmitForm = async (e) => 
-        {
-            e.preventDefault();
-
-            try {
-                if (!formData.campaignName || 
-                    !formData.campaignDescription || 
-                    !formData.startDate || 
-                    !formData.endDate || 
-                    !formData.dailyDigest){
-                     Swal.fire({
-                        icon: 'error',
-                        title: 'Oops...',
-                        text: 'All fields are required!',
-                      });
-                    }
-       const res = await fetch('https://infinion-test-int-test.azurewebsites.net/api/Campaign', {
-                    method: 'POST',
-                    headers: {
-                      'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({...formData})
-                  });
-                  const data = await res.json()
-               
-                  if(data.success === false){
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Submission Failed',
-                        text: 'There was an error submitting the campaign.',
-                      })
-                  }else {
-                    Swal.fire({
-                      icon: 'success',
-                      text: 'Your campaign has been successfully created.',
-                      confirmButtonText: 'Go Back to campaign list',
-                      confirmButtonColor: "#247B7B",
-                      
-
-
-                    }).then((success) => {
-                        if (success.isConfirmed) {
-                          navigate('/campaignlist');  
-                        }});
-              
-                }
-                
-            } catch (error) {
-                console.error("Error submitting the form:", error);
-            }
+      const handleSubmitForm = async (e) => {
+        e.preventDefault();
+    
+        // Validate form fields
+        if (!formData.campaignName || !formData.campaignDescription || !formData.startDate || !formData.endDate || !formData.dailyDigest) {
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'All fields are required!',
+          });
+          return;
         }
     
+        // Validate date range
+        if (new Date(formData.endDate) < new Date(formData.startDate)) {
+          Swal.fire({
+            icon: 'error',
+            title: 'Invalid Date Range',
+            text: 'End date must be after the start date.',
+          });
+          return;
+        }
+    
+        // Submit form data to API
+        try {
+          const res = await fetch('https://infinion-test-int-test.azurewebsites.net/api/Campaign', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formData),
+          });
+    
+          const data = await res.json();
+    
+          if (data === false) {
+            Swal.fire({
+              icon: 'error',
+              title: 'Submission Failed',
+              text: 'There was an error submitting the campaign.',
+            });
+          } else {
+            Swal.fire({
+              icon: 'success',
+              text: 'Your campaign has been successfully created.',
+              confirmButtonText: 'Go Back to Campaign List',
+              confirmButtonColor: '#247B7B',
+            }).then((success) => {
+              if (success.isConfirmed) {
+                // Reset form data
+                setFormData({
+                  campaignName: '',
+                  campaignDescription: '',
+                  startDate: '',
+                  endDate: '',
+                  digestCampaign: true,
+                  linkedKeywords: [],
+                  dailyDigest: '',
+                });
+                navigate('/campaignlist');
+              }
+            });
+          }
+        } catch (error) {
+          console.error('Error submitting the form:', error);
+        }
+      };
    
   return (
     <div className='ml-72'>
@@ -164,7 +179,7 @@ const CreateList = () => {
                 </select>
             </div>
             <div className='flex gap-6'>
-                <Link to="/">
+             <Link to={'/'}>
                 <button className='w-[300px] text-[#247B7B] border-2 py-2  border-[#247B7B] rounded-md'>Cancel</button>
                 </Link>
                 <button className='w-[300px] text-white bg-[#247B7B] py-2 rounded-md'>Create Campaign</button>
@@ -173,6 +188,6 @@ const CreateList = () => {
       </div>
     </div>
   )
-}
-
-export default CreateList
+      }
+   
+export default CreateList;
