@@ -23,11 +23,12 @@ const Campaign = () => {
         if (!res.ok) {
           throw new Error('Failed to fetch campaigns');
         }
+        
         const data = await res.json();
         setCampaigns(data);
         setFilteredCampaigns(data);
         
-        // Count active and inactive campaigns
+      
         const activeCampaigns = data.filter(campaign => campaign.digestCampaign === "Yes");
         const inactiveCampaigns = data.filter(campaign => campaign.digestCampaign === "No");
         setActiveCount(activeCampaigns.length);
@@ -40,7 +41,6 @@ const Campaign = () => {
     fetchList();
   }, []);
 
-  // Filter handling
   const handleFilter = (filter) => {
     setCurrentFilter(filter);
     setCurrentPage(1); // 
@@ -53,7 +53,7 @@ const Campaign = () => {
     }
   };
 
-  // Pagination logic
+
   const indexOfLastCampaign = currentPage * campaignsPerPage;
   const indexOfFirstCampaign = indexOfLastCampaign - campaignsPerPage;
   const currentCampaigns = filteredCampaigns.slice(indexOfFirstCampaign, indexOfLastCampaign);
@@ -96,7 +96,7 @@ const Campaign = () => {
     });
   };
 
-  // Pagination UI
+  // for the Pagination UI
   const pageNumbers = [];
   for (let i = 1; i <= Math.ceil(filteredCampaigns.length / campaignsPerPage); i++) {
     pageNumbers.push(i);
@@ -108,24 +108,24 @@ const Campaign = () => {
         <div className='font-extrabold text-[#247B7B] text-[24px]'>All Campaigns</div>
         <div className='md:flex md:justify-between md:items-center mt-6 w-[85%]'>
           <div className='flex gap-4 flex-col lg:flex-row w-full'>
-            <button
+         <button
               className={`border-2 shadow-xl border-[#247B7B] w-[80px] md:w-[150px] text-[#247B7B] py-1 rounded-md ${currentFilter === 'all' ? 'bg-[#247B7B] text-white' : ''}`}
               onClick={() => handleFilter('all')}
             >
               All ({campaigns.length})
-            </button>
-            <button
+         </button>
+          <button
               className={`border-2 shadow-xl border-[#247B7B] w-[120px] md:w-[150px] text-[#247B7B] py-1 rounded-md ${currentFilter === 'inactive' ? 'bg-[#247B7B] text-white' : ''}`}
               onClick={() => handleFilter('inactive')}
             >
               Inactive ({inactiveCount})
-            </button>
-            <button
+          </button>
+          <button
               className={`border-2 shadow-xl border-[#247B7B] w-[120px] md:w-[150px] text-[#247B7B] py-1 rounded-md ${currentFilter === 'active' ? 'bg-[#247B7B] text-white' : ''}`}
               onClick={() => handleFilter('active')}
             >
               Active ({activeCount})
-            </button>
+           </button>
           </div>
         </div>
 
@@ -175,7 +175,7 @@ const Campaign = () => {
             </tbody>
           </table>
 
-          {/* Pagination Controls */}
+    {/* pagination control */}
           <div className="pagination mt-4">
             {pageNumbers.map(number => (
               <button
