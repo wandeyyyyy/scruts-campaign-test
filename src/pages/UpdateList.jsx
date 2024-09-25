@@ -155,6 +155,9 @@ const UpdateList = () => {
   return (
     <div className='md:ml-72'>
       <div className='px-10'>
+      <Link to="/">
+      <div className=' bg-[#247b7b] w-[90px] md:hidden font-medium  cursor-pointer text-white shadow-md px-2 mb-2 py-1'>Go Home</div>
+      </Link>
         <div className='flex justify-between items-center'>
           <h1 className='font-extrabold text-[#247B7B] text-[24px]'>Campaign Information</h1>
           <div className='flex bg-[#EDF0F0] rounded-md text-[10px] md:text-[16px]'>

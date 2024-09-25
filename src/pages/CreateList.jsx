@@ -157,7 +157,7 @@ const CreateList = () => {
                     <li key={index} className='inline-flex items-center gap-2 mr-2 mb-1'>
                       <span className='bg-[#247B7B] text-white px-3 py-1 rounded font-bold'>
                         {keyword}
-                        <button type='button' onClick={() => removeKeyword(index)} className='text-red-500 ml-8'>x</button>
+                        <button type='button' onClick={() => removeKeyword(index)} className='text-white ml-8'>x</button>
                       </span>
                      
                     </li>
@@ -179,11 +179,11 @@ const CreateList = () => {
             </div>
             <div className='flex flex-col md:flex-row gap-6'>
             <Link to={'/'}>
-              <button className='w-[300px] text-[#247B7B] border-2 py-2 border-[#247B7B] rounded-md'>Cancel</button>
+              <button className='w-[300px] text-[#247B7B] border-2 font-bold py-2 border-[#247B7B] rounded-md'>Cancel</button>
             </Link>
             <button 
               type="submit" 
-              className='w-[300px] text-white bg-[#247B7B] py-2 rounded-md'
+              className='w-[300px] text-white font-bold bg-[#247B7B] py-2 rounded-md'
               disabled={loading}
             >
               {loading ? 'Creating...' : 'Create Campaign'}

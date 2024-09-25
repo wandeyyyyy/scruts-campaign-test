@@ -105,6 +105,9 @@ const Campaign = () => {
   return (
     <>
       <div className='md:ml-72 px-10'>
+      <Link to="/">
+      <div className=' bg-[#247b7b] w-[90px] md:hidden font-medium  cursor-pointer text-white shadow-md px-2 mb-2 py-1'>Go Home</div>
+      </Link>
         <div className='font-extrabold text-[#247B7B] text-[24px]'>All Campaigns</div>
         <div className='md:flex md:justify-between md:items-center mt-6 w-[85%]'>
           <div className='flex gap-4 flex-col lg:flex-row w-full'>
